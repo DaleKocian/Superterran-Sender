@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="big_red">#ef0c1e</color>
+    <color name="boost">#2befe4</color>
+    <color name="controller">#319407</color>
+</resources>

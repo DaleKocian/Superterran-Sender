@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="horizontal"
-    tools:context=".GameActivity" >
+    tools:context=".GameActivity">
 
     <io.gamejam.poundcode.superterran.view.TouchControllerView
         android:id="@+id/touch_controller"
-        android:layout_width="0dp"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
-        android:background="#c4ffff"
-        android:layout_marginRight="50dp"
-        android:layout_weight="0.2" />
+        android:background="@color/controller" />
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
-        android:gravity="center"
-        android:orientation="vertical" >
+    <Button
+        android:id="@+id/button_boost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="@color/boost"
+        android:text="@string/button_fire"
+        android:textSize="50sp"
+        android:padding="5dp"
+        android:layout_above="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 
-        <Button
-            android:id="@+id/button_fire"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="50sp"
-            android:adjustViewBounds="true"
-            android:text="@string/button_fire" />
-    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/big_red"
+        android:minLines="2"
+        android:padding="5dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/button_super"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:id="@+id/button"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp" />
 
-</LinearLayout>
+</RelativeLayout>

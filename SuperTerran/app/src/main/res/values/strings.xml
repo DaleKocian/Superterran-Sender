@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SuperTerran</string>
     <string name="media_route_menu_title">Title</string>
-    <string name="connect_label">Connecting...</string>
-    <string name="button_fire">Fire</string>
+    <string name="connect_label">You only have one chromecast device you can connect to.</string>
+    <string name="button_fire">Boost</string>
+    <string name="button_super">Super Gravity</string>
 </resources>

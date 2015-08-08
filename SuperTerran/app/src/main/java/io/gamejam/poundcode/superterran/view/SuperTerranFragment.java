@@ -2,7 +2,6 @@ package io.gamejam.poundcode.superterran.view;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,7 @@ import org.json.JSONObject;
 
 import io.gamejam.poundcode.superterran.R;
 import io.gamejam.poundcode.superterran.SuperTerranApplication;
+import io.gamejam.poundcode.superterran.media.SoundPoolManager;
 
 /**
  * Created by chris_pound on 8/8/15.
@@ -27,7 +27,7 @@ public class SuperTerranFragment extends Fragment {
     private static final String TAG = SuperTerranFragment.class.getSimpleName();
 
     private TouchControllerView mTouchControllerView;
-    private Button mFireButton;
+    private Button mBOOOOOOOOST;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,13 +37,14 @@ public class SuperTerranFragment extends Fragment {
 
         mTouchControllerView = (TouchControllerView) view.findViewById(R.id.touch_controller);
 
-        mFireButton = (Button) view.findViewById(R.id.button_fire);
-        mFireButton.setOnClickListener(new View.OnClickListener() {
+        mBOOOOOOOOST = (Button) view.findViewById(R.id.button_boost);
+        mBOOOOOOOOST.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 SuperTerranApplication.getInstance().getSendMessageHandler().enqueueMessage(
                         MESSAGE_TYPE_STARCAST_FIRE, createFireMessage());
+                SoundPoolManager.playAudio(R.raw.boost, getActivity());
             }
 
         });
