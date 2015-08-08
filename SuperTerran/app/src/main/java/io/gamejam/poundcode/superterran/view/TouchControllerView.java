@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import io.gamejam.poundcode.superterran.SuperTerranApplication;
+import io.gamejam.poundcode.superterran.cast.SuperterranMessageBuilder;
 
 /**
  * Custom class for a view that will register touch/gestures from the user.
@@ -38,8 +39,8 @@ public class TouchControllerView extends View {
                 float screenHeight = getHeight();
                 float scaled = y / screenHeight;
                 SuperTerranApplication.getInstance().getSendMessageHandler().enqueueMessage(
-                        SuperTerranFragment.MESSAGE_TYPE_STARCAST_MOVE,
-                        SuperTerranFragment.createMoveMessage(scaled));
+                        SuperterranMessageBuilder.MESSAGE_TYPE_SUPERTERRAN_MOVE,
+                        SuperterranMessageBuilder.createMoveMessage(scaled));
                 break;
             default:
                 return false;
