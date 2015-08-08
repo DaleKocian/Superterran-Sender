@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SuperTerran</string>
+    <string name="media_route_menu_title">Title</string>
+    <string name="connect_label">Connecting...</string>
+</resources>
