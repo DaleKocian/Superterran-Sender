@@ -13,34 +13,54 @@
         android:layout_height="match_parent"
         android:background="@color/controller" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/touch_controller"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/rotation"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/send"
+            android:text="SEND"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/button_boost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@color/boost"
-        android:text="@string/button_fire"
-        android:textSize="50sp"
-        android:padding="5dp"
         android:layout_above="@+id/button"
         android:layout_alignStart="@+id/button"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:adjustViewBounds="true"
+        android:background="@color/boost"
+        android:padding="5dp"
+        android:text="@string/button_fire"
+        android:textSize="50sp" />
 
     <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
         android:background="@color/big_red"
         android:minLines="2"
         android:padding="5dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:text="@string/button_super"
         android:textColor="@android:color/white"
-        android:textSize="25sp"
-        android:id="@+id/button"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="16dp" />
+        android:textSize="25sp" />
 
 </RelativeLayout>

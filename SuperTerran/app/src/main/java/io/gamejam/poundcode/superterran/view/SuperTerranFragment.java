@@ -39,6 +39,18 @@ public class SuperTerranFragment extends Fragment {
         mTouchControllerView = (TouchControllerView) view.findViewById(R.id.touch_controller);
 
         mBOOOOOOOOST = (Button) view.findViewById(R.id.button_boost);
+        rotation = (EditText) view.findViewById(R.id.rotation);
+        send = (Button) view.findViewById(R.id.send);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                float degree = Float.parseFloat(rotation.getText().toString());
+                SuperTerranApplication.getInstance().getSendMessageHandler().enqueueMessage(
+                        SuperterranMessageBuilder.MESSAGE_TYPE_SUPERTERRAN_MOVE,
+                        SuperterranMessageBuilder.createMoveMessage(degree));
+            }
+        });
+
         mBOOOOOOOOST.setOnClickListener(new View.OnClickListener() {
 
             @Override
