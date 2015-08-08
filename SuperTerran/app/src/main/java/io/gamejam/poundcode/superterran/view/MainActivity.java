@@ -6,13 +6,12 @@ import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.MediaRouteActionProvider;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.cast.Cast;
 import com.google.android.gms.cast.games.GameManagerClient;
 import com.google.android.gms.cast.games.GameManagerState;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 
@@ -21,7 +20,6 @@ import java.util.Observer;
 
 import io.gamejam.poundcode.superterran.R;
 import io.gamejam.poundcode.superterran.SuperTerranApplication;
-import io.gamejam.poundcode.superterran.cast.CastConnectionFragment;
 import io.gamejam.poundcode.superterran.cast.CastConnectionManager;
 
 /**
@@ -45,11 +43,23 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        CastConnectionManager manager =
+                SuperTerranApplication.getInstance().getCastConnectionManager();
+        manager.startScan();
+        manager.addObserver(this);
+        SuperTerranApplication.getInstance().getSendMessageHandler().resumeSendingMessages();
+        updateFragments();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mCastConnectionFragment = new CastConnectionFragment();
         mSuperTerranFragment = new SuperTerranFragment();
+        updateFragments();
     }
 
     @Override
@@ -79,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
                     if (!gameManagerResult.getStatus().isSuccess()) {
                         SuperTerranApplication.getInstance().getCastConnectionManager().
                                 disconnectFromReceiver(false);
-//                        showErrorDialog(gameManagerResult.getStatus().getStatusMessage());
+                        Log.e(TAG, gameManagerResult.getStatus().getStatusMessage());
                     }
                     updateFragments();
                 }
@@ -89,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     }
 
     private void updateFragments() {
+        Log.d(TAG, "Updating fragments");
         if (isChangingConfigurations() || isFinishing() || isDestroyed()) {
             return;
         }
