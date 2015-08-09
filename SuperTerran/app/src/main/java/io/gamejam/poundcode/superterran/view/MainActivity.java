@@ -3,6 +3,7 @@ package io.gamejam.poundcode.superterran.view;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
@@ -49,22 +50,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         manager.deleteObserver(this);
         SuperTerranApplication.getInstance().getSendMessageHandler().flushMessages();
         updateFragments();
-        manager.getGameManagerClient().setListener(new GameManagerClient.Listener() {
-            @Override
-            public void onStateChanged(GameManagerState currentState, GameManagerState previousState) {
-                PlayerInfo playerInfo = currentState.getConnectedControllablePlayers().get(0);
-                try {
-                    Integer currentScore = (Integer) playerInfo.getPlayerData().get("mass");
-                    mSuperTerranFragment.updateScore(currentScore);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onGameMessageReceived(String s, JSONObject jsonObject) {
-            }
-        });
     }
 
     @Override

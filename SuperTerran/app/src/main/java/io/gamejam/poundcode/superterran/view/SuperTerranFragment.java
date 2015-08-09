@@ -7,9 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.cast.games.GameManagerClient;
+import com.google.android.gms.cast.games.GameManagerState;
+import com.google.android.gms.cast.games.PlayerInfo;
 import com.zerokol.views.JoyStickControllerView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import io.gamejam.poundcode.superterran.R;
 import io.gamejam.poundcode.superterran.SuperTerranApplication;
@@ -25,7 +32,7 @@ public class SuperTerranFragment extends Fragment implements JoystickMovedListen
 
     private Button mBOOOOOOOOST;
     private Button mSuperGravity;
-    private TextView tvScore;
+    private ProgressBar score;
     private JoyStickControllerView mController;
 
     @Override
@@ -37,14 +44,39 @@ public class SuperTerranFragment extends Fragment implements JoystickMovedListen
         mController.setOnJoystickMoveListener(this, REPEAT_INTERVAL);
         mBOOOOOOOOST = (Button) view.findViewById(R.id.btnBoost);
         mSuperGravity = (Button) view.findViewById(R.id.btnSuperGravity);
-        tvScore = (TextView) view.findViewById(R.id.tvScore);
+        score = (ProgressBar) view.findViewById(R.id.score);
         mBOOOOOOOOST.setOnClickListener(getBoostOnClickListener());
         mSuperGravity.setOnClickListener(getSuperGravityOnClickListener());
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        SuperTerranApplication.getInstance().getCastConnectionManager().getGameManagerClient().setListener(new GameManagerClient.Listener() {
+            @Override
+            public void onStateChanged(GameManagerState currentState, GameManagerState previousState) {
+                PlayerInfo playerInfo = currentState.getConnectedControllablePlayers().get(0);
+//                Log.d(TAG, playerInfo.getPlayerData().toString());
+                try {
+                    if(playerInfo != null && playerInfo.getPlayerData() != null && playerInfo.getPlayerData().get("mass") != null)
+                    {
+                        Integer currentScore = (Integer) playerInfo.getPlayerData().get("mass");
+                        SuperTerranFragment.this.updateScore(currentScore);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onGameMessageReceived(String s, JSONObject jsonObject) {
+            }
+        });
+    }
+
     public void updateScore(Integer currentScore) {
-        tvScore.setText("Current Score:" + currentScore);
+        score.setProgress(currentScore);
     }
 
     private View.OnClickListener getSuperGravityOnClickListener() {
@@ -85,6 +117,5 @@ public class SuperTerranFragment extends Fragment implements JoystickMovedListen
                 .getSendMessageHandler()
                 .enqueueMessage(SuperterranMessageBuilder.MESSAGE_TYPE_SUPERTERRAN_MOVE,
                         SuperterranMessageBuilder.createMoveMessage(angle));
-        Log.d(TAG, "ANGLE: " + angle);
     }
 }
