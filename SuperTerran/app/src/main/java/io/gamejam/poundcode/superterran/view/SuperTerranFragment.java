@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.zerokol.views.JoyStickControllerView;
 
@@ -24,6 +25,7 @@ public class SuperTerranFragment extends Fragment implements JoystickMovedListen
 
     private Button mBOOOOOOOOST;
     private Button mSuperGravity;
+    private TextView tvScore;
     private JoyStickControllerView mController;
 
     @Override
@@ -35,9 +37,14 @@ public class SuperTerranFragment extends Fragment implements JoystickMovedListen
         mController.setOnJoystickMoveListener(this, REPEAT_INTERVAL);
         mBOOOOOOOOST = (Button) view.findViewById(R.id.btnBoost);
         mSuperGravity = (Button) view.findViewById(R.id.btnSuperGravity);
+        tvScore = (TextView) view.findViewById(R.id.tvScore);
         mBOOOOOOOOST.setOnClickListener(getBoostOnClickListener());
         mSuperGravity.setOnClickListener(getSuperGravityOnClickListener());
         return view;
+    }
+
+    public void updateScore(Integer currentScore) {
+        tvScore.setText("Current Score:" + currentScore);
     }
 
     private View.OnClickListener getSuperGravityOnClickListener() {

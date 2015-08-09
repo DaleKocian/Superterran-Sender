@@ -42,4 +42,14 @@
         android:layout_alignBottom="@+id/touch_controller"
         android:layout_alignParentRight="true"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Current Score: 0"
+        android:textColor="@color/boost"
+        android:id="@+id/tvScore"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
+
 </RelativeLayout>

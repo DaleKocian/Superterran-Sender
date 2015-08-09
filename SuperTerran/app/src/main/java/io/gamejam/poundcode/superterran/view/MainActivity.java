@@ -15,8 +15,12 @@ import android.widget.EditText;
 
 import com.google.android.gms.cast.games.GameManagerClient;
 import com.google.android.gms.cast.games.GameManagerState;
+import com.google.android.gms.cast.games.PlayerInfo;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private CastConnectionFragment mCastConnectionFragment;
     private SuperTerranFragment mSuperTerranFragment;
     private String userName = "Player";
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -44,6 +49,22 @@ public class MainActivity extends AppCompatActivity implements Observer {
         manager.deleteObserver(this);
         SuperTerranApplication.getInstance().getSendMessageHandler().flushMessages();
         updateFragments();
+        manager.getGameManagerClient().setListener(new GameManagerClient.Listener() {
+            @Override
+            public void onStateChanged(GameManagerState currentState, GameManagerState previousState) {
+                PlayerInfo playerInfo = currentState.getConnectedControllablePlayers().get(0);
+                try {
+                    Integer currentScore = (Integer) playerInfo.getPlayerData().get("mass");
+                    mSuperTerranFragment.updateScore(currentScore);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onGameMessageReceived(String s, JSONObject jsonObject) {
+            }
+        });
     }
 
     @Override
@@ -97,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
             final GameManagerClient gameManagerClient = manager.getGameManagerClient();
             PendingResult<GameManagerClient.GameManagerResult> result =
                     gameManagerClient.sendPlayerAvailableRequest(null);
-
             result.setResultCallback(new ResultCallback<GameManagerClient.GameManagerResult>() {
                 @Override
                 public void onResult(final GameManagerClient.GameManagerResult gameManagerResult) {
@@ -118,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
         if (isChangingConfigurations() || isFinishing() || isDestroyed()) {
             return;
         }
-
         Fragment fragment;
         if (hasPlayerConnected()) {
             SuperTerranApplication.getInstance().getSendMessageHandler().enqueueMessage(
