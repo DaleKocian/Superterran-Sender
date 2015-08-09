@@ -33,7 +33,8 @@ public class SuperTerranApplication extends Application  implements CastConnecti
 
     @Override
     public String getCastAppId() {
-        return CastConstants.CAST_APP_ID;
+//        return CastConstants.CAST_APP_ID;
+        return CastConstants.CAST_APP_ID_DEV;
     }
 
     public SendMessageHandler getSendMessageHandler() {
