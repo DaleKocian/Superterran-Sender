@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@android:color/black"
     android:orientation="horizontal"
     tools:context=".GameActivity">
 
@@ -13,6 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="50dp"
         android:layout_height="match_parent"
+        android:background="@drawable/joystick"
         />
 
     <Button
@@ -22,12 +23,11 @@
         android:adjustViewBounds="true"
         android:background="@color/boost"
         android:text="@string/button_fire"
-        android:textSize="50sp"
-        android:padding="5dp"
-        android:layout_above="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:textSize="25sp"
+        android:padding="18dp"
+        android:layout_alignStart="@+id/btnBoost"
+        android:layout_alignTop="@+id/touch_controller"
+        android:layout_alignParentRight="true"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -35,14 +35,11 @@
         android:background="@color/big_red"
         android:minLines="2"
         android:padding="5dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:text="@string/button_super"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="25sp"
-        android:id="@+id/button"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="16dp" />
+        android:id="@+id/btnBoost"
+        android:layout_alignBottom="@+id/touch_controller"
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

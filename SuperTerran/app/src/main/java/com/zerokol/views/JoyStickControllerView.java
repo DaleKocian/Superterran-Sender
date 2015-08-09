@@ -121,22 +121,6 @@ public class JoyStickControllerView extends View implements Runnable {
         // super.onDraw(canvas);
         centerX = (getWidth()) / 2;
         centerY = (getHeight()) / 2;
-
-        // painting the main circle
-        canvas.drawCircle((int) centerX, (int) centerY, joystickRadius,
-                mainCircle);
-        // painting the secondary circle
-        canvas.drawCircle((int) centerX, (int) centerY, joystickRadius / 2,
-                secondaryCircle);
-        // paint lines
-        canvas.drawLine((float) centerX, (float) centerY, (float) centerX,
-                (float) (centerY - joystickRadius), verticalLine);
-        canvas.drawLine((float) (centerX - joystickRadius), (float) centerY,
-                (float) (centerX + joystickRadius), (float) centerY,
-                horizontalLine);
-        canvas.drawLine((float) centerX, (float) (centerY + joystickRadius),
-                (float) centerX, (float) centerY, horizontalLine);
-
         // painting the move button
         canvas.drawCircle(xPosition, yPosition, buttonRadius, button);
     }
