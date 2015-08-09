@@ -10,13 +10,25 @@ import org.json.JSONObject;
  */
 public class SuperterranMessageBuilder {
 
+    public static final int MESSAGE_TYPE_SUPERTERRAN_USER_NAME = 0;
     public static final int MESSAGE_TYPE_SUPERTERRAN_BOOST = 1;
     public static final int MESSAGE_TYPE_SUPERTERRAN_MOVE = 2;
     public static final int MESSAGE_TYPE_SUPERTERRAN_SUPER_GRAVITY = 3;
+    private static final String MESSAGE_FIELD_SUPERTERRAN_USER_NAME = "user_name";
     private static final String MESSAGE_FIELD_SUPERTERRAN_BOOST = "boost";
     private static final String MESSAGE_FIELD_SUPERTERRAN_MOVE = "move";
     private static final String MESSAGE_FIELD_SUPERTERRAN_SUPER_GRAVITY = "super_gravity";
     private static final String TAG = SuperterranMessageBuilder.class.getSimpleName();
+
+    public static JSONObject createUserNameMessage(String userName) {
+        JSONObject userNameMessage = new JSONObject();
+        try {
+            userNameMessage.put(MESSAGE_FIELD_SUPERTERRAN_USER_NAME, userName);
+        } catch (JSONException e) {
+            Log.e(TAG, "Error creating JSON boost message", e);
+        }
+        return userNameMessage;
+    }
 
     public static JSONObject createBoostMessage() {
         JSONObject boostMessage = new JSONObject();

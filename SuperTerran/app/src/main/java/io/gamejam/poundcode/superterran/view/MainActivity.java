@@ -2,13 +2,16 @@ package io.gamejam.poundcode.superterran.view;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.MediaRouteActionProvider;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.google.android.gms.cast.games.GameManagerClient;
 import com.google.android.gms.cast.games.GameManagerState;
@@ -21,6 +24,7 @@ import java.util.Observer;
 import io.gamejam.poundcode.superterran.R;
 import io.gamejam.poundcode.superterran.SuperTerranApplication;
 import io.gamejam.poundcode.superterran.cast.CastConnectionManager;
+import io.gamejam.poundcode.superterran.cast.SuperterranMessageBuilder;
 
 /**
  * Created by chris_pound on 8/8/15.
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements Observer {
     private static final String TAG = MainActivity.class.getSimpleName();
     private CastConnectionFragment mCastConnectionFragment;
     private SuperTerranFragment mSuperTerranFragment;
-
+    private String userName = "Player";
     @Override
     protected void onPause() {
         super.onPause();
@@ -60,6 +64,17 @@ public class MainActivity extends AppCompatActivity implements Observer {
         mCastConnectionFragment = new CastConnectionFragment();
         mSuperTerranFragment = new SuperTerranFragment();
         updateFragments();
+        final EditText etUserName = new EditText(this);
+        new AlertDialog.Builder(this).setCancelable(false).setMessage("Please enter your name.")
+                .setView(etUserName).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (etUserName != null) {
+                    userName = etUserName.getText().toString();
+                    dialog.dismiss();
+                }
+            }
+        }).show();
     }
 
     @Override
@@ -106,6 +121,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
 
         Fragment fragment;
         if (hasPlayerConnected()) {
+            SuperTerranApplication.getInstance().getSendMessageHandler().enqueueMessage(
+                    SuperterranMessageBuilder.MESSAGE_TYPE_SUPERTERRAN_USER_NAME,
+                    SuperterranMessageBuilder.createUserNameMessage(userName));
             fragment = mSuperTerranFragment;
         } else {
             fragment = mCastConnectionFragment;
