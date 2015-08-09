@@ -26,7 +26,7 @@ public class SuperterranMessageBuilder {
         return fireMessage;
     }
 
-    public static JSONObject createMoveMessage(float move) {
+    public static JSONObject createMoveMessage(int move) {
         JSONObject moveMessage = new JSONObject();
         try {
             moveMessage.put(MESSAGE_FIELD_SUPERTERRAN_MOVE, move);

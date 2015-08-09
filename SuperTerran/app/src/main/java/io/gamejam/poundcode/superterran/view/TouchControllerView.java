@@ -40,7 +40,7 @@ public class TouchControllerView extends View {
                 float scaled = y / screenHeight;
                 SuperTerranApplication.getInstance().getSendMessageHandler().enqueueMessage(
                         SuperterranMessageBuilder.MESSAGE_TYPE_SUPERTERRAN_MOVE,
-                        SuperterranMessageBuilder.createMoveMessage(scaled));
+                        SuperterranMessageBuilder.createMoveMessage((int) scaled));
                 break;
             default:
                 return false;

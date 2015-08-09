@@ -7,11 +7,13 @@
     android:orientation="horizontal"
     tools:context=".GameActivity">
 
-    <io.gamejam.poundcode.superterran.view.TouchControllerView
+    <com.zerokol.views.JoyStickControllerView
         android:id="@+id/touch_controller"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="50dp"
         android:layout_height="match_parent"
-        android:background="@color/controller" />
+        />
 
     <Button
         android:id="@+id/button_boost"
