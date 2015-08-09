@@ -47,6 +47,7 @@ public class SuperTerranFragment extends Fragment implements JoystickMovedListen
                 SuperTerranApplication.getInstance().getSendMessageHandler().enqueueMessage(
                         SuperterranMessageBuilder.MESSAGE_TYPE_SUPERTERRAN_SUPER_GRAVITY,
                         SuperterranMessageBuilder.createSuperGravityMessage());
+                SoundPoolManager.playAudio(R.raw.gravity_bomb, getActivity());
                 mSuperGravity.setClickable(false);
                 mSuperGravity.setBackgroundColor(getResources().getColor(R.color.material_blue_grey_800));
             }
