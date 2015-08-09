@@ -17,7 +17,7 @@
         />
 
     <Button
-        android:id="@+id/button_boost"
+        android:id="@+id/btnBoost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
@@ -25,7 +25,7 @@
         android:text="@string/button_fire"
         android:textSize="25sp"
         android:padding="18dp"
-        android:layout_alignStart="@+id/btnBoost"
+        android:layout_alignStart="@+id/btnSuperGravity"
         android:layout_alignTop="@+id/touch_controller"
         android:layout_alignParentRight="true"/>
 
@@ -38,7 +38,7 @@
         android:text="@string/button_super"
         android:textColor="@android:color/black"
         android:textSize="25sp"
-        android:id="@+id/btnBoost"
+        android:id="@+id/btnSuperGravity"
         android:layout_alignBottom="@+id/touch_controller"
         android:layout_alignParentRight="true"/>
 

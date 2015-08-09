@@ -10,20 +10,22 @@ import org.json.JSONObject;
  */
 public class SuperterranMessageBuilder {
 
-    public static final int MESSAGE_TYPE_SUPERTERRAN_FIRE = 1;
+    public static final int MESSAGE_TYPE_SUPERTERRAN_BOOST = 1;
     public static final int MESSAGE_TYPE_SUPERTERRAN_MOVE = 2;
-    private static final String MESSAGE_FIELD_SUPERTERRAN_FIRE = "fire";
+    public static final int MESSAGE_TYPE_SUPERTERRAN_SUPER_GRAVITY = 3;
+    private static final String MESSAGE_FIELD_SUPERTERRAN_BOOST = "boost";
     private static final String MESSAGE_FIELD_SUPERTERRAN_MOVE = "move";
+    private static final String MESSAGE_FIELD_SUPERTERRAN_SUPER_GRAVITY = "super_gravity";
     private static final String TAG = SuperterranMessageBuilder.class.getSimpleName();
 
-    public static JSONObject createFireMessage() {
-        JSONObject fireMessage = new JSONObject();
+    public static JSONObject createBoostMessage() {
+        JSONObject boostMessage = new JSONObject();
         try {
-            fireMessage.put(MESSAGE_FIELD_SUPERTERRAN_FIRE, true);
+            boostMessage.put(MESSAGE_FIELD_SUPERTERRAN_BOOST, true);
         } catch (JSONException e) {
-            Log.e(TAG, "Error creating JSON fire message", e);
+            Log.e(TAG, "Error creating JSON boost message", e);
         }
-        return fireMessage;
+        return boostMessage;
     }
 
     public static JSONObject createMoveMessage(int move) {
@@ -34,5 +36,15 @@ public class SuperterranMessageBuilder {
             Log.e(TAG, "Error creating JSON move message", e);
         }
         return moveMessage;
+    }
+
+    public static JSONObject createSuperGravityMessage() {
+        JSONObject superGravityMessage = new JSONObject();
+        try {
+            superGravityMessage.put(MESSAGE_FIELD_SUPERTERRAN_SUPER_GRAVITY, true);
+        } catch (JSONException e) {
+            Log.e(TAG, "Error creating JSON boost message", e);
+        }
+        return superGravityMessage;
     }
 }
